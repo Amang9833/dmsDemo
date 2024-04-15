@@ -1,12 +1,15 @@
 package com.perfios.demoDms.Controller;
 
+import com.perfios.demoDms.Model.FileModel;
 import com.perfios.demoDms.Service.DmsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 public class DmsController {
@@ -15,8 +18,10 @@ public class DmsController {
     DmsService dmsService;
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file")MultipartFile file, @RequestBody String filePath){
-        dmsService.uploadFile()
-        return "ok";
+    public String uploadFileToLocal(@RequestParam("file")MultipartFile file, @RequestParam String fileYear, @RequestParam String bankName, @RequestParam String accountNo) throws IOException {
+        return dmsService.uploadFile(file,fileYear, bankName, accountNo);
     }
+
+//    @GetMapping("/download")
+
 }
